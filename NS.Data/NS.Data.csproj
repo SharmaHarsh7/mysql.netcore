@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Framework\NS.Framework.Repository.Pattern.MySQL\NS.Framework.Repository.Pattern.MySQL.csproj" />
     <ProjectReference Include="..\Framework\NS.Framework.Repository\NS.Framework.Repository.Pattern.csproj" />
-    <ProjectReference Include="..\NS.Domain\NS.Domain\NS.Domain.csproj" />
+    <ProjectReference Include="..\NS.Domain\NS.Domain.csproj" />
   </ItemGroup>
 
 </Project>

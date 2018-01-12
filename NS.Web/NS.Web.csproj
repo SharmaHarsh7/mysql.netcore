@@ -21,7 +21,9 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
 
     <ProjectReference Include="..\NS.Core\NS.Core.csproj" />
+    <ProjectReference Include="..\NS.Core\NS.Core.csproj" />
     <ProjectReference Include="..\NS.Data\NS.Data.csproj" />
+    <ProjectReference Include="..\NS.Domain\NS.Domain.csproj" />
     <ProjectReference Include="..\NS.Service\NS.Services.csproj" />
     <ProjectReference Include="..\NS.Web.Framework\NS.Web.Framework.csproj" />
   </ItemGroup>

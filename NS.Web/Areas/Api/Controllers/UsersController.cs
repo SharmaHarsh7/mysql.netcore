@@ -23,7 +23,7 @@ namespace NS.Web.Areas.Api.Controllers
         {
             var data = from a in  _usersService.Queryable()
                        where a.Name.Contains("a")
-                       select a;
+                       select a.Name;
 
 
             return Ok(data);

@@ -11,6 +11,7 @@ using NS.Data;
 using System;
 using System.IO;
 using System.Linq;
+using NS.Data.Models;
 
 namespace Nop.Web.Framework.Infrastructure.Extensions
 {
@@ -28,8 +29,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         public static IServiceProvider ConfigureApplicationServices(this IServiceCollection services, IConfigurationRoot configuration)
         {
 
-            services.AddMvc();
-
+            services.AddNSMvc();
 
             // setup database connection
             services.Configure<DBSettings>(options =>
@@ -107,6 +107,8 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
             //MVC now serializes JSON with camel case names by default, use this code to avoid it
             mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 
             return mvcBuilder;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using NS.Data.Mappings.Users;
 using NS.Framework.Repository.Pattern.DataContext;
 using NS.Framework.Repository.Pattern.MySQL;
@@ -11,7 +12,7 @@ namespace NS.Data.Models
         public NSDBContext(DbContextOptions<DbContext> options)
        : base(options)
         {
-            this.Database.EnsureCreated();
+            this.Database.Migrate();
         }
         public new DbSet<T> Set<T>() where T : class
         {
@@ -26,12 +27,21 @@ namespace NS.Data.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            
-
             modelBuilder.ApplyConfiguration(new UserMap());
-
-
+            modelBuilder.ApplyConfiguration(new EmployeeMap());
         }
     }
+
+
+    public class NSDBContextFactory : IDesignTimeDbContextFactory<NSDBContext>
+    {
+        public NSDBContext CreateDbContext(string[] args)
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
+            optionsBuilder.UseMySQL("server=127.0.0.1;database=Signals;user=root;password=root");
+
+            return new NSDBContext(optionsBuilder.Options);
+        }
+    }
+
 }

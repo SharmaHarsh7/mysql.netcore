@@ -21,9 +21,7 @@ namespace NS.Web.Areas.Api.Controllers
         [Route("")]
         public IActionResult Get()
         {
-            var data = from a in  _usersService.Queryable()
-                       where a.Name.Contains("a")
-                       select a.Name;
+            var data = _usersService.Query().Include(x=>x.Employees).Select();
 
 
             return Ok(data);
@@ -45,14 +43,14 @@ namespace NS.Web.Areas.Api.Controllers
         {
             return Ok(_usersService.Insert(value));
         }
-        
+
         // PUT: api/User/5
         [HttpPut("{id}")]
         public IActionResult Put(string id, [FromBody]User value)
         {
             return Ok(_usersService.Update(value));
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(string id)

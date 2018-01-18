@@ -1,10 +1,8 @@
-﻿using DS.Frameowrk.Service.Pattern;
-using DS.Data.Models;
+﻿using DS.Domain.Models.Users;
 using DS.Frameowrk.Repository.Repositories.Pattern;
 using DS.Frameowrk.Repository.UnitOfWork.Pattern;
 using DS.Frameowrk.Service.Pattern;
 using System.Linq;
-using DS.Domain.Models.Users;
 
 namespace DS.Services
 {

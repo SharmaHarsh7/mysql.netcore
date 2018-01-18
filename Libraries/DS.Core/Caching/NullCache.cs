@@ -1,4 +1,4 @@
-namespace Tavant.Core.Caching
+namespace DS.Core.Caching
 {
     public partial class NullCache : ICacheManager
     {

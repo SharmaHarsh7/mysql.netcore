@@ -8,6 +8,7 @@
     <ProjectReference Include="..\..\Framework\DS.Framework.Repository.Pattern.MySQL\DS.Framework.Repository.Pattern.MySQL.csproj" />
     <ProjectReference Include="..\..\Framework\DS.Framework.Repository\DS.Framework.Repository.Pattern.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Core\DS.Core.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Data\DS.Data.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Service\DS.Services.csproj" />
   </ItemGroup>
 

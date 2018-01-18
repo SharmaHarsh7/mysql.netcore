@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DS.Core.Attributes;
+using DS.Frameowrk.Repository.Infrastructure.Pattern;
 using DS.Framework.Repository.Pattern.MySQL;
+using System;
 using System.ComponentModel;
-using DS.Core.Attributes;
-using DS.Core.Enums;
-using Newtonsoft.Json;
 
 namespace DS.Core.Domain
 {
     public abstract class GlobalBaseEntity : Entity
     {
 
-        public override Repository.Pattern.Infrastructure.ObjectState ObjectState
+        public override ObjectState ObjectState
         {
             get { return base.ObjectState; }
             set { base.ObjectState = value; }

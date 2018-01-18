@@ -38,7 +38,7 @@ namespace DS.Data.Models
         public NSDBContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<DbContext>();
-            optionsBuilder.UseMySQL("server=127.0.0.1;database=Signals;user=root;password=raghav");
+            optionsBuilder.UseMySQL("server=127.0.0.1;database=Signals;user=root;password=root");
 
             return new NSDBContext(optionsBuilder.Options);
         }

@@ -1,14 +1,14 @@
-using DS.Core;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
-using System.Web;
-using System.Web.Hosting;
-
-using DS.Core.Infrastructure;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Net.Http.Headers;
 
 namespace DS.Core
 {
@@ -37,20 +37,7 @@ namespace DS.Core
         {
             try
             {
-                File.SetLastWriteTimeUtc(MapPath("~/web.config"), DateTime.UtcNow);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        protected virtual bool TryWriteGlobalAsax()
-        {
-            try
-            {
-                File.SetLastWriteTimeUtc(MapPath("~/global.asax"), DateTime.UtcNow);
+                File.SetLastWriteTimeUtc(CommonHelper.MapPath("~/web.config"), DateTime.UtcNow);
                 return true;
             }
             catch
@@ -62,58 +49,21 @@ namespace DS.Core
         #endregion
 
         #region Methods
-        public virtual string MapPath(string path)
-        {
-            if (HostingEnvironment.IsHosted)
-            {
-                return HostingEnvironment.MapPath(path);
-            }
-
-            //if appliaciton is not hosted. For example, run in unit tests
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            path = path.Replace("~/", "").TrimStart('/').Replace('/', '\\');
-            return Path.Combine(baseDirectory, path);
-        }
 
         public virtual void RestartAppDomain()
         {
-            if (CommonHelper.GetTrustLevel() > AspNetHostingPermissionLevel.Medium)
+            //the site will be restarted during the next request automatically
+            //_applicationLifetime.StopApplication();
+
+            //"touch" web.config to force restart
+            var success = TryWriteWebConfig();
+            if (!success)
             {
-                //full trust
-                HttpRuntime.UnloadAppDomain();
-
-                TryWriteGlobalAsax();
+                throw new DSException("nopCommerce needs to be restarted due to a configuration change, but was unable to do so." + Environment.NewLine +
+                    "To prevent this issue in the future, a change to the web server configuration is required:" + Environment.NewLine +
+                    "- run the application in a full trust environment, or" + Environment.NewLine +
+                    "- give the application write access to the 'web.config' file.");
             }
-            else
-            {
-                //medium trust
-                bool success = TryWriteWebConfig();
-                if (!success)
-                {
-                    throw new DSException("Application needs to be restarted due to a configuration change, but was unable to do so." + Environment.NewLine +
-                        "To prevent this issue in the future, a change to the web server configuration is required:" + Environment.NewLine +
-                        "- run the application in a full trust environment, or" + Environment.NewLine +
-                        "- give the application write access to the 'web.config' file.");
-                }
-
-                success = TryWriteGlobalAsax();
-                if (!success)
-                {
-                    throw new DSException("Application needs to be restarted due to a configuration change, but was unable to do so." + Environment.NewLine +
-                        "To prevent this issue in the future, a change to the web server configuration is required:" + Environment.NewLine +
-                        "- run the application in a full trust environment, or" + Environment.NewLine +
-                        "- give the application write access to the 'Global.asax' file.");
-                }
-            }
-        }
-
-        public virtual string GetAppURL()
-        {
-            string url = string.Empty;
-
-            url = HttpContext.Current.Request.Url.AbsoluteUri;
-
-            return url;
         }
 
 

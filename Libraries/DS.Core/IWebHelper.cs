@@ -7,10 +7,6 @@ namespace DS.Core
     /// </summary>
     public partial interface IWebHelper
     {
-        string MapPath(string path);
-
         void RestartAppDomain();
-
-        string GetAppURL();
     }
 }

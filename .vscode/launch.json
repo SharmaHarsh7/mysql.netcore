@@ -6,7 +6,7 @@
    "configurations": [
    
         {
-            "name": "DiGiCampus Web",
+            "name": "Run Web",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",

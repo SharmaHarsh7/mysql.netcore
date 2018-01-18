@@ -19,7 +19,7 @@ namespace DS.Core.Infrastructure
     /// <summary>
     /// Represents Nop engine
     /// </summary>
-    public class NSEngine : IEngine
+    public class DSEngine : IEngine
     {
         #region Properties
 
@@ -245,7 +245,7 @@ namespace DS.Core.Infrastructure
                     {
                         var service = Resolve(parameter.ParameterType);
                         if (service == null)
-                            throw new NSException("Unknown dependency");
+                            throw new DSException("Unknown dependency");
                         return service;
                     });
 
@@ -257,7 +257,7 @@ namespace DS.Core.Infrastructure
                     innerException = ex;
                 }
             }
-            throw new NSException("No constructor was found that had all the dependencies satisfied.", innerException);
+            throw new DSException("No constructor was found that had all the dependencies satisfied.", innerException);
         }
 
         #endregion

@@ -38,6 +38,8 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
                 options.Database = configuration.GetSection("SQLConnection:Database").Value;
             });
 
+            services.ConfigureStartupConfig<HostingConfig>(configuration.GetSection("Hosting"));
+
             services.AddDbContext<DbContext>(options => options.UseMySQL(configuration.GetSection("SQLConnection:ConnectionString").Value));
 
             // Load NS Config from the appsetting.json file

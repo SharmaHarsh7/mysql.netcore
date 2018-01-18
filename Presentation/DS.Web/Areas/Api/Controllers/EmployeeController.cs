@@ -24,7 +24,9 @@ namespace DS.Web.Areas.Api.Controllers
         {
             var data = _employeesService.Queryable().ToList();
 
-            return Ok(data);
+            //return Ok(data);
+
+            return Ok(EngineContext.Current.Resolve<IUserService>().GetUser(1));
         }
 
         [HttpGet("{employeeId}")]

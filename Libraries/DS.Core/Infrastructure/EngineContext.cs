@@ -17,7 +17,7 @@ namespace DS.Core.Infrastructure
         {
             //create NopEngine as engine
             if (Singleton<IEngine>.Instance == null)
-                Singleton<IEngine>.Instance = new NSEngine();
+                Singleton<IEngine>.Instance = new DSEngine();
 
             return Singleton<IEngine>.Instance;
         }

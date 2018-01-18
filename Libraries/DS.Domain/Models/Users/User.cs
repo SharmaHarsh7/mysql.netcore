@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using DS.Framework.Repository.Pattern.MySQL;
+﻿using DS.Core.Domain;
+using System.Collections.Generic;
 
 namespace DS.Domain.Models.Users
 {
-    public class User : Entity
+    public class User : BaseEntity
     {
         public int ID_User { get; set; }
         public string Name { get; set; }

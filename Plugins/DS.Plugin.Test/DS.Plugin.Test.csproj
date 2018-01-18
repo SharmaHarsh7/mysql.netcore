@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Presentation\DS.Web\Plugins\DS.Plugin.Test\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="logo.jpg" />
+    <None Remove="plugin.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="plugin.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\DS.Framework.Repository.Pattern.MySQL\DS.Framework.Repository.Pattern.MySQL.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Core\DS.Core.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Domain\DS.Domain.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Service\DS.Services.csproj" />
+  </ItemGroup>
+
+</Project>

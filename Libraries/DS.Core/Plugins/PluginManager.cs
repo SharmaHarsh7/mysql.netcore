@@ -372,7 +372,7 @@ namespace DS.Core.Plugins
                         var pluginDescriptor = dfd.Value;
 
                         //ensure that version of plugin is valid
-                        if (!pluginDescriptor.SupportedVersions.Contains(NopVersion.CurrentVersion, StringComparer.InvariantCultureIgnoreCase))
+                        if (!pluginDescriptor.SupportedVersions.Contains(DSVersion.CurrentVersion, StringComparer.InvariantCultureIgnoreCase))
                         {
                             incompatiblePlugins.Add(pluginDescriptor.SystemName);
                             continue;

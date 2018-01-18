@@ -22,12 +22,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
-
-    <ProjectReference Include="..\Libraries\DS.Core\DS.Core.csproj" />
-    <ProjectReference Include="..\Libraries\DS.Core\DS.Core.csproj" />
-    <ProjectReference Include="..\Libraries\DS.Data\DS.Data.csproj" />
-    <ProjectReference Include="..\Libraries\DS.Domain\DS.Domain.csproj" />
-    <ProjectReference Include="..\Libraries\DS.Service\DS.Services.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Core\DS.Core.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Data\DS.Data.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Domain\DS.Domain.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Service\DS.Services.csproj" />
     <ProjectReference Include="..\DS.Web.Framework\DS.Web.Framework.csproj" />
   </ItemGroup>
 

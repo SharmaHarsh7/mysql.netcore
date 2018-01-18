@@ -1,0 +1,3 @@
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Core/obj/Debug/netcoreapp2.0/DS.Core.csproj.CoreCompileInputs.cache
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Core/obj/Debug/netcoreapp2.0/DS.Core.AssemblyInfoInputs.cache
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Core/obj/Debug/netcoreapp2.0/DS.Core.AssemblyInfo.cs

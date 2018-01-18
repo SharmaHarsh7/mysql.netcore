@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>DS.Framework.Repository.Pattern.MySQL</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="FakeDbContext.cs.txt" />
+    <None Remove="FakeDbSet.cs.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommonServiceLocator" Version="2.0.2" />
+    <PackageReference Include="LinqKit.Core" Version="1.1.12" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DS.Framework.Repository\DS.Framework.Repository.Pattern.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.entityframeworkcore\2.0.0\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

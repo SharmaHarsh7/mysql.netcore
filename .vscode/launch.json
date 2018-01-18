@@ -6,14 +6,14 @@
    "configurations": [
    
         {
-            "name": ".NET Core Launch (web)",
+            "name": "DiGiCampus Web",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/NS.Web/bin/Debug/netcoreapp2.0/NS.Web.dll",
+            "program": "${workspaceFolder}/Presentation/DS.Web/bin/Debug/netcoreapp2.0/DS.Web.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/NS.Web",
+            "cwd": "${workspaceFolder}/Presentation/DS.Web",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {

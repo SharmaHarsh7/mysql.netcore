@@ -1,0 +1,14 @@
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Domain.deps.json
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Domain.dll
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Domain.pdb
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Framework.Repository.Pattern.dll
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Framework.Repository.Pattern.MySQL.dll
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Framework.Repository.Pattern.MySQL.pdb
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Framework.Repository.Pattern.pdb
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/obj/Debug/netcoreapp2.0/DS.Domain.csproj.CoreCompileInputs.cache
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/obj/Debug/netcoreapp2.0/DS.Domain.AssemblyInfoInputs.cache
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/obj/Debug/netcoreapp2.0/DS.Domain.AssemblyInfo.cs
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/obj/Debug/netcoreapp2.0/DS.Domain.dll
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/obj/Debug/netcoreapp2.0/DS.Domain.pdb
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Framework.Service.Pattern.dll
+/home/raghav/DiGiCampus/server/web/Libraries/DS.Domain/bin/Debug/netcoreapp2.0/DS.Framework.Service.Pattern.pdb

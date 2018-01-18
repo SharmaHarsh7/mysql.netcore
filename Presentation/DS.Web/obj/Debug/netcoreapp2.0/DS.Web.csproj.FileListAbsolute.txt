@@ -1,1 +1,0 @@
-/home/raghav/DiGiCampus/server/web/Presentation/DS.Web/obj/Debug/netcoreapp2.0/DS.Web.csproj.GenerateResource.Cache

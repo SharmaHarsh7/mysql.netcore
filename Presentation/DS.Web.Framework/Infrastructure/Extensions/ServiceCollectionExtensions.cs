@@ -43,7 +43,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
             services.AddDbContext<DbContext>(options => options.UseMySQL(configuration.GetSection("SQLConnection:ConnectionString").Value));
 
             // Load NS Config from the appsetting.json file
-            services.ConfigureStartupConfig<NSConfig>(configuration.GetSection("NSConfig"));
+            services.ConfigureStartupConfig<DSConfig>(configuration.GetSection("NSConfig"));
 
             //add accessor to HttpContext
             services.AddHttpContextAccessor();

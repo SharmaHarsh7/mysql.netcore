@@ -43,9 +43,5 @@ namespace DS.Core.Domain
     public abstract class BaseEntity : GlobalBaseEntity
     {
 
-
-        [DSFieldDescription(Enums.DataType.Number, "Institute ID", false,DefaultValue:0)]
-        public int? ID_Institute { get; set; }
-
     }
 }

@@ -187,7 +187,7 @@ namespace DS.Core.Plugins
         /// <param name="applicationPartManager">Application part manager</param>
         /// <param name="config">Config</param>
         /// <returns>Assembly</returns>
-        private static Assembly PerformFileDeploy(FileInfo plug, ApplicationPartManager applicationPartManager, NSConfig config)
+        private static Assembly PerformFileDeploy(FileInfo plug, ApplicationPartManager applicationPartManager, DSConfig config)
         {
             if (plug.Directory == null || plug.Directory.Parent == null)
                 throw new InvalidOperationException("The plugin directory for the " + plug.Name + " file exists in a folder outside of the allowed nopCommerce folder hierarchy");
@@ -202,7 +202,8 @@ namespace DS.Core.Plugins
             Assembly shadowCopiedAssembly;
             try
             {
-                shadowCopiedAssembly = Assembly.Load(assemblyName);
+                //    shadowCopiedAssembly = Assembly.Load(assemblyName);
+                shadowCopiedAssembly = Assembly.LoadFrom(shadowCopiedPlug.FullName);
             }
             catch (FileLoadException)
             {
@@ -297,7 +298,7 @@ namespace DS.Core.Plugins
         private static bool IsPackagePluginFolder(DirectoryInfo folder)
         {
             if (folder?.Parent == null) return false;
-            if (!folder.Parent.Name.Equals(PluginsPathName, StringComparison.InvariantCultureIgnoreCase)) return false;
+        //    if (!folder.Parent.Name.Equals(PluginsPathName, StringComparison.InvariantCultureIgnoreCase)) return false;
 
             return true;
         }
@@ -311,7 +312,7 @@ namespace DS.Core.Plugins
         /// </summary>
         /// <param name="applicationPartManager">Application part manager</param>
         /// <param name="config">Config</param>
-        public static void Initialize(ApplicationPartManager applicationPartManager, NSConfig config)
+        public static void Initialize(ApplicationPartManager applicationPartManager, DSConfig config)
         {
             if (applicationPartManager == null)
                 throw new ArgumentNullException(nameof(applicationPartManager));

@@ -3,6 +3,7 @@ using DS.Services;
 using System.Linq;
 using DS.Domain.Models.Users;
 using DS.Core.Infrastructure;
+using DS.Services.Events;
 
 namespace DS.Web.Areas.Api.Controllers
 {
@@ -11,10 +12,12 @@ namespace DS.Web.Areas.Api.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _employeesService;
+        private readonly IEventPublisher _publisher;
 
-        public EmployeeController(IEmployeeService employeesService)
+        public EmployeeController(IEmployeeService employeesService, IEventPublisher publisher)
         {
             _employeesService = employeesService;
+            _publisher = publisher;
         }
 
         // GET: api/Employee
@@ -25,8 +28,12 @@ namespace DS.Web.Areas.Api.Controllers
             var data = _employeesService.Queryable().ToList();
 
             //return Ok(data);
+            var userService = EngineContext.Current.Resolve<IUserService>();
 
-            return Ok(EngineContext.Current.Resolve<IUserService>().GetUser(1));
+            var a = userService.Queryable().FirstOrDefault();
+            _publisher.EntityInserted(a);
+
+            return Ok(data);
         }
 
         [HttpGet("{employeeId}")]

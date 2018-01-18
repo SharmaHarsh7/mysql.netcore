@@ -22,9 +22,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <ProjectReference Include="..\..\Framework\DS.Framework.Repository.Pattern.MySQL\DS.Framework.Repository.Pattern.MySQL.csproj" />
+    <ProjectReference Include="..\..\Framework\DS.Framework.Repository\DS.Framework.Repository.Pattern.csproj" />
+    <ProjectReference Include="..\..\Framework\DS.Framework.Service\DS.Framework.Service.Pattern.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Core\DS.Core.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Data\DS.Data.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Domain\DS.Domain.csproj" />
+    <ProjectReference Include="..\..\Libraries\DS.Repository\DS.Repository.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Service\DS.Services.csproj" />
     <ProjectReference Include="..\DS.Web.Framework\DS.Web.Framework.csproj" />
   </ItemGroup>

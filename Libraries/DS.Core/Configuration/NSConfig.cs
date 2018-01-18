@@ -1,6 +1,6 @@
 ﻿namespace DS.Core.Configuration
 {
-    public class NSConfig
+    public class DSConfig
     {
         public bool UseUnsafeLoadAssembly { get; set; }
         public bool ClearPluginShadowDirectoryOnStartup { get; set; }

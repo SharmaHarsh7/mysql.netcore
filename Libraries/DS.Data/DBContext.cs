@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using DS.Data.Mappings.Users;
 using DS.Framework.Repository.Pattern.DataContext;
 using DS.Framework.Repository.Pattern.MySQL;
+using DS.Data.Mappings.Configuration;
 
 namespace DS.Data.Models
 {
@@ -29,6 +30,7 @@ namespace DS.Data.Models
         {
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new EmployeeMap());
+            modelBuilder.ApplyConfiguration(new SettingMap());
         }
     }
 

@@ -7,7 +7,7 @@ namespace DS.Core.Infrastructure.DependencyManagement
 {
     public interface IDependencyRegistrar
     {
-        void Register(ContainerBuilder builder, ITypeFinder typeFinder, NSConfig config);
+        void Register(ContainerBuilder builder, ITypeFinder typeFinder, DSConfig config);
 
         int Order { get; }
     }

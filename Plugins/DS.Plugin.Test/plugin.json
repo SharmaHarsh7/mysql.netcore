@@ -1,11 +1,11 @@
 ﻿{
-  "Group": "Payment methods",
-  "FriendlyName": "Credit Card",
-  "SystemName": "Payments.Manual",
-  "Version": "1.42",
-  "SupportedVersions": [ "4.00" ],
-  "Author": "nopCommerce team",
+  "Group": "DS Test Plugin",
+  "FriendlyName": "DS Test",
+  "SystemName": "DS.Plugin.Test",
+  "Version": "1.00",
+  "SupportedVersions": [ "1.00" ],
+  "Author": "Harsh",
   "DisplayOrder": 1,
-  "FileName": "Nop.Plugin.Payments.Manual.dll",
-  "Description": "This plugin enables credit card payment (stored into database)"
+  "FileName": "DS.Plugin.Test.dll",
+  "Description": "test Plugin"
 }

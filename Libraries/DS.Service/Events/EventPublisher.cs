@@ -57,7 +57,7 @@ namespace DS.Services.Events
         {
             //get all event subscribers, excluding from not installed plugins
             var subscribers = _subscriptionService.GetSubscriptions<T>()
-                .Where(subscriber => PluginManager.FindPlugin(subscriber.GetType())?.Installed ?? true).ToList();
+                .Where(subscriber => PluginManager.FindPlugin(subscriber.GetType()).in?.Installed ?? true).ToList();
 
             //publish event to subscribers
             subscribers.ForEach(subscriber => PublishToConsumer(subscriber, eventMessage));

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using DS.Core.Configuration;
+using DS.Core.Domain.Configuration;
 using DS.Core.Infrastructure;
 using DS.Core.Infrastructure.DependencyManagement;
 using DS.Data.Models;
@@ -19,13 +20,13 @@ namespace DS.Web.Framework.Infrastructure
             get { return 0; }
         }
 
-        void IDependencyRegistrar.Register(ContainerBuilder builder, ITypeFinder typeFinder, NSConfig config)
+        void IDependencyRegistrar.Register(ContainerBuilder builder, ITypeFinder typeFinder, DSConfig config)
         {
             builder.RegisterType<NSDBContext>().As<IDataContextAsync>().InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWorkAsync>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<User>>().As<IRepositoryAsync<User>>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<Employee>>().As<IRepositoryAsync<Employee>>().InstancePerLifetimeScope();
-            
+
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>().InstancePerLifetimeScope();
         }

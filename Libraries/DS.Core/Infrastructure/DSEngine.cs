@@ -70,7 +70,7 @@ namespace DS.Core.Infrastructure
         /// <param name="nopConfig">Startup Nop configuration parameters</param>
         /// <param name="services">Collection of service descriptors</param>
         /// <param name="typeFinder">Type finder</param>
-        protected virtual IServiceProvider RegisterDependencies(NSConfig nopConfig, IServiceCollection services, ITypeFinder typeFinder)
+        protected virtual IServiceProvider RegisterDependencies(DSConfig nopConfig, IServiceCollection services, ITypeFinder typeFinder)
         {
             var containerBuilder = new ContainerBuilder();
 
@@ -117,7 +117,7 @@ namespace DS.Core.Infrastructure
             //set base application path
             var provider = services.BuildServiceProvider();
             var hostingEnvironment = provider.GetRequiredService<IHostingEnvironment>();
-            var nopConfig = provider.GetRequiredService<NSConfig>();
+            var nopConfig = provider.GetRequiredService<DSConfig>();
             CommonHelper.BaseDirectory = hostingEnvironment.ContentRootPath;
 
             //initialize plugins
@@ -161,7 +161,7 @@ namespace DS.Core.Infrastructure
                 instance.ConfigureServices(services, configuration);
 
             //register dependencies
-            var nopConfig = services.BuildServiceProvider().GetService<NSConfig>();
+            var nopConfig = services.BuildServiceProvider().GetService<DSConfig>();
             RegisterDependencies(nopConfig, services, typeFinder);
 
             //run startup tasks

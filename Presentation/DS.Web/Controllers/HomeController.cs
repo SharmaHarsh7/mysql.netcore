@@ -12,7 +12,7 @@ namespace MvcMovie.Controllers
         public string Index()
         {
 
-            throw new System.Exception("asdas");
+            throw new System.ArgumentOutOfRangeException(); ;
 
             return "website is running...";
         }

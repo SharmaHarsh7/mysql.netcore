@@ -4,6 +4,8 @@ using System.Linq;
 using DS.Domain.Models.Users;
 using DS.Core.Infrastructure;
 using DS.Services.Events;
+using DS.Core;
+using System;
 
 namespace DS.Web.Areas.Api.Controllers
 {
@@ -32,6 +34,9 @@ namespace DS.Web.Areas.Api.Controllers
 
             var a = userService.Queryable().FirstOrDefault();
             _publisher.EntityInserted(a);
+
+            throw new Exception("Invalid data");
+
 
             return Ok(data);
         }

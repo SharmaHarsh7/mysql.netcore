@@ -11,6 +11,9 @@ namespace MvcMovie.Controllers
 
         public string Index()
         {
+
+            throw new System.Exception("asdas");
+
             return "website is running...";
         }
 

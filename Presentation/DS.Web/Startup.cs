@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Nop.Web.Framework.Infrastructure.Extensions;
 using DS.Core.Infrastructure;
-
-
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace DS.Web
 {
@@ -46,15 +46,33 @@ namespace DS.Web
 
             EngineContext.Current.ConfigureRequestPipeline(app);
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-            }
+            //app.UseExceptionHandler(
+            //                           options =>
+            //                           {
+            //                               options.Run(
+            //                             async context =>
+            //                              {
+            //                                  context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            //                                  context.Response.ContentType = "text/html";
+            //                                  var ex = context.Features.Get<IExceptionHandlerFeature>();
+            //                                  if (ex != null)
+            //                                  {
+            //                                      var err = $"<h1>Error: {ex.Error.Message}</h1>{ex.Error.StackTrace }";
+            //                                      await context.Response.WriteAsync(err).ConfigureAwait(false);
+            //                                  }
+            //                              });
+            //                           }
+            //                          );
+
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //    app.UseBrowserLink();
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Error");
+            //}
 
             app.UseStaticFiles();
 

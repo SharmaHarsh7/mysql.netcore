@@ -12,6 +12,7 @@ using System;
 using System.IO;
 using System.Linq;
 using DS.Data.Models;
+using DS.Web.Framework.Filters;
 
 namespace Nop.Web.Framework.Infrastructure.Extensions
 {
@@ -102,7 +103,11 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         public static IMvcBuilder AddNSMvc(this IServiceCollection services)
         {
             //add basic MVC feature
-            var mvcBuilder = services.AddMvc();
+            var mvcBuilder = services.AddMvc(
+                               config =>
+                               {
+                                   config.Filters.Add(typeof(DSExceptionFilter));
+                               });
 
             //use session temp data provider
             mvcBuilder.AddSessionStateTempDataProvider();
@@ -110,6 +115,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
             //MVC now serializes JSON with camel case names by default, use this code to avoid it
             mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             mvcBuilder.AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 
 

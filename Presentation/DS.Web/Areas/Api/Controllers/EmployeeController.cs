@@ -6,6 +6,7 @@ using DS.Core.Infrastructure;
 using DS.Services.Events;
 using DS.Core;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace DS.Web.Areas.Api.Controllers
 {
@@ -15,11 +16,13 @@ namespace DS.Web.Areas.Api.Controllers
     {
         private readonly IEmployeeService _employeesService;
         private readonly IEventPublisher _publisher;
+        private ILogger Logger { get; }
 
-        public EmployeeController(IEmployeeService employeesService, IEventPublisher publisher)
+        public EmployeeController(IEmployeeService employeesService, IEventPublisher publisher, ILoggerFactory loggerFactory)
         {
             _employeesService = employeesService;
             _publisher = publisher;
+            Logger = loggerFactory.CreateLogger(GetType().Namespace);
         }
 
         // GET: api/Employee
@@ -35,8 +38,7 @@ namespace DS.Web.Areas.Api.Controllers
             var a = userService.Queryable().FirstOrDefault();
             _publisher.EntityInserted(a);
 
-            throw new Exception("Invalid data");
-
+            Logger.LogError("Sample Log");
 
             return Ok(data);
         }

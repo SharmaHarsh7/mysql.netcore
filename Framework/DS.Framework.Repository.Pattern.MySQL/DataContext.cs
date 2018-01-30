@@ -103,9 +103,9 @@ namespace DS.Framework.Repository.Pattern.MySQL
         ///     objects written to the underlying database.</returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            SyncObjectsStatePreCommit();
+          //  SyncObjectsStatePreCommit();
             var changesAsync = await base.SaveChangesAsync(cancellationToken);
-            SyncObjectsStatePostCommit();
+            //SyncObjectsStatePostCommit();
             return changesAsync;
         }
 

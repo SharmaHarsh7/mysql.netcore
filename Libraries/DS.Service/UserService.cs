@@ -3,6 +3,7 @@ using DS.Frameowrk.Repository.Repositories.Pattern;
 using DS.Frameowrk.Repository.UnitOfWork.Pattern;
 using DS.Frameowrk.Service.Pattern;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DS.Services
 {
@@ -10,7 +11,7 @@ namespace DS.Services
     {
         
         User GetUser(int id);
-        new User Insert(User user);
+        new Task<User> Insert(User user);
         new User Update(User user);
         void Delete(int userId);
 
@@ -34,11 +35,11 @@ namespace DS.Services
         }
 
 
-        public new User Insert(User user)
+        public new async Task<User> Insert(User user)
         {
             _userRepository.Insert(user);
 
-           _unitOfWorkAsync.SaveChanges();
+           await _unitOfWorkAsync.SaveChangesAsync();
 
             return user;
         }

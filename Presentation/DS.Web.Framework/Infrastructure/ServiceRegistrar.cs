@@ -26,9 +26,13 @@ namespace DS.Web.Framework.Infrastructure
             builder.RegisterType<UnitOfWork>().As<IUnitOfWorkAsync>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<User>>().As<IRepositoryAsync<User>>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<Employee>>().As<IRepositoryAsync<Employee>>().InstancePerLifetimeScope();
+            builder.RegisterType<Repository<Client>>().As<IRepositoryAsync<Client>>().InstancePerLifetimeScope();
+            builder.RegisterType<Repository<RefreshToken>>().As<IRepositoryAsync<RefreshToken>>().InstancePerLifetimeScope();
+            
 
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>().InstancePerLifetimeScope();
+            builder.RegisterType<AuthService>().As<IAuthService>().InstancePerLifetimeScope();
         }
     }
 }

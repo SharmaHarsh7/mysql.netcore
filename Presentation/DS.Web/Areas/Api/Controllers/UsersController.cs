@@ -2,6 +2,7 @@
 using DS.Domain.Models.Users;
 using DS.Services;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DS.Web.Areas.Api.Controllers
 {
@@ -39,9 +40,9 @@ namespace DS.Web.Areas.Api.Controllers
 
         // POST: api/User
         [HttpPost]
-        public IActionResult Post([FromBody]User value)
+        public async Task<IActionResult> Post([FromBody]User value)
         {
-            return Ok(_usersService.Insert(value));
+            return Ok(await _usersService.Insert(value));
         }
 
         // PUT: api/User/5

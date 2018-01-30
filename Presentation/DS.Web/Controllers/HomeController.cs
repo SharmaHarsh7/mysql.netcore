@@ -12,8 +12,6 @@ namespace MvcMovie.Controllers
         public string Index()
         {
 
-            throw new System.ArgumentOutOfRangeException(); ;
-
             return "website is running...";
         }
 

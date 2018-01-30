@@ -11,9 +11,10 @@ using System;
 namespace DS.Data.Migrations
 {
     [DbContext(typeof(NSDBContext))]
-    partial class NSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20180130081202_auth")]
+    partial class auth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,9 +133,7 @@ namespace DS.Data.Migrations
                     b.Property<DateTime>("ModifiedOn");
 
                     b.Property<string>("ProtectedTicket")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue("");
+                        .IsRequired();
 
                     b.Property<string>("Subject")
                         .IsRequired()

@@ -97,7 +97,7 @@ namespace DS.Framework.Repository.Pattern.MySQL
             return RepositoryAsync<TEntity>();
         }
 
-        public Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess)
+        public Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess = true)
         {
             return _dataContext.SaveChangesAsync(acceptAllChangesOnSuccess);
         }

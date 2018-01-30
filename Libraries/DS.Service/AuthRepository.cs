@@ -61,7 +61,7 @@ namespace DS.Services
             if (refreshToken != null)
             {
                 _refreshTokenRepository.Delete(refreshToken);
-                return await _unitOfWorkAsync.SaveChangesAsync() > 0;
+                return await _unitOfWorkAsync.SaveChangesAsync(true) > 0;
             }
 
             return false;
@@ -70,7 +70,7 @@ namespace DS.Services
         public async Task<bool> RemoveRefreshToken(RefreshToken refreshToken)
         {
             _refreshTokenRepository.Delete(refreshToken);
-            return await _unitOfWorkAsync.SaveChangesAsync() > 0;
+            return await _unitOfWorkAsync.SaveChangesAsync(true) > 0;
         }
 
         public async Task<RefreshToken> FindRefreshToken(string refreshTokenId)

@@ -74,10 +74,10 @@ namespace DS.Framework.Repository.Pattern.MySQL
         /// <returns>A task that represents the asynchronous save operation.  The 
         ///     <see cref="Task.Result">Task.Result</see> contains the number of 
         ///     objects written to the underlying database.</returns>
-        public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            return await this.SaveChangesAsync(CancellationToken.None);
-        }
+        //public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess = true, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    return await this.SaveChangesAsync(CancellationToken.None);
+        //}
         /// <summary>
         ///     Asynchronously saves all changes made in this context to the underlying database.
         /// </summary>
@@ -101,13 +101,13 @@ namespace DS.Framework.Repository.Pattern.MySQL
         /// <returns>A task that represents the asynchronous save operation.  The 
         ///     <see cref="Task.Result">Task.Result</see> contains the number of 
         ///     objects written to the underlying database.</returns>
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-        {
-          //  SyncObjectsStatePreCommit();
-            var changesAsync = await base.SaveChangesAsync(cancellationToken);
-            //SyncObjectsStatePostCommit();
-            return changesAsync;
-        }
+        //public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        //{
+        //    SyncObjectsStatePreCommit();
+        //    var changesAsync = await base.SaveChangesAsync(cancellationToken);
+        //    SyncObjectsStatePostCommit();
+        //    return changesAsync;
+        //}
 
         public void SyncObjectState<TEntity>(TEntity entity) where TEntity : class, IObjectState
         {

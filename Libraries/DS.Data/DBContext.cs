@@ -4,6 +4,8 @@ using DS.Data.Mappings.Users;
 using DS.Framework.Repository.Pattern.DataContext;
 using DS.Framework.Repository.Pattern.MySQL;
 using DS.Data.Mappings.Configuration;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace DS.Data.Models
 {
@@ -25,6 +27,12 @@ namespace DS.Data.Models
             this.ApplyStateChanges();
             return base.SaveChanges();
         }
+
+        //public override async Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess=true, CancellationToken cancellationToken = default(CancellationToken))
+        //{
+        //    this.ApplyStateChanges();
+        //    return await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NLog.Extensions.Logging;
-using NLog.Web;
 using Nop.Web.Framework.Infrastructure.Extensions;
+using Serilog;
 using System;
 
 namespace DS.Web
@@ -43,14 +42,13 @@ namespace DS.Web
 
             EngineContext.Current.ConfigureRequestPipeline(app);
 
-            //add NLog to .NET Core
-            loggerFactory.AddNLog();
+            Log.Logger = new LoggerConfiguration()
+               .MinimumLevel.Information()
+               .WriteTo.File("logs\\myapp.txt", rollingInterval: RollingInterval.Day)
+               .CreateLogger();
 
-            //Enable ASP.NET Core features (NLog.web) - only needed for ASP.NET Core users
-            app.AddNLogWeb();
+            Log.Information("Logger Setup Done");
 
-            //needed for non-NETSTANDARD platforms: configure nlog.config in your project root. NB: you need NLog.Web.AspNetCore package for this. 
-            env.ConfigureNLog("nlog.config");
 
             //app.UseExceptionHandler(
             //                           options =>

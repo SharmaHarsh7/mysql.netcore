@@ -12,6 +12,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using DS.Core.Configuration;
 
 namespace DS.Web.Areas.Api.Controllers
 {
@@ -22,11 +24,13 @@ namespace DS.Web.Areas.Api.Controllers
 
         public readonly IAuthService _authService;
         public readonly IUserService _userService;
+        public readonly AuthConfig _authConfig;
 
-        public TokenController(IAuthService authService, IUserService userService)
+        public TokenController(IAuthService authService, IUserService userService, AuthConfig options)
         {
             _authService = authService;
             _userService = userService;
+            _authConfig = options;
         }
 
         [HttpPost("")]
@@ -71,17 +75,19 @@ namespace DS.Web.Areas.Api.Controllers
 
             if (parameters.grant_type == "password")
             {
-                return await DoPassword(parameters, client);
+                return await AuthenticateUser(parameters, client);
+            }
+            else if (parameters.grant_type == "refresh_token")
+            {
+                return await RefreshToken(parameters, client);
             }
             else
             {
                 return BadRequest("Invalid grant_type");
             }
-
-            return Ok(parameters);
         }
 
-        private async Task<IActionResult> DoPassword(TokenAuthParameters parameters, Client client)
+        private async Task<IActionResult> AuthenticateUser(TokenAuthParameters parameters, Client client)
         {
 
             var isValidated = _userService.Queryable().Where(x => x.UserName == parameters.username && x.Password == parameters.password).Count() > 0;
@@ -91,8 +97,67 @@ namespace DS.Web.Areas.Api.Controllers
                 return Unauthorized();
             }
 
-            var refreshTokenId = Guid.NewGuid().ToString("p"); // r : Raghav
+            return Ok(await GetJwt(client, parameters));
+        }
 
+        private async Task<IActionResult> RefreshToken(TokenAuthParameters parameters, Client client)
+        {
+            var token = await _authService.FindRefreshToken(CommonHelper.GetHash(parameters.refresh_token));
+
+            if (token == null)
+            {
+                return BadRequest("Invalid refresh token");
+            }
+
+            // Validate if refresh token expired
+            if (token.ExpiresUtc > DateTime.UtcNow)
+            {
+                return BadRequest("Refresh token expired");
+            }
+
+            var protectedTicket = new JwtSecurityTokenHandler().ReadJwtToken(token.ProtectedTicket);
+
+            if (await _authService.RemoveRefreshToken(token))
+            {
+                var userId = protectedTicket.Claims.Where(x => x.Type == "UserId").FirstOrDefault()?.Value ?? "";
+                parameters.username = userId;
+
+                return Ok(await GetJwt(client, parameters));
+            }
+
+            return Ok("Default OK");
+        }
+
+
+
+        private async Task<object> GetJwt(Client client, TokenAuthParameters parameters)
+        {
+            var now = DateTime.UtcNow;
+
+            // Add claim informations
+            var claims = new Claim[]
+            {
+            new Claim("ClientId", client.Id),
+            new Claim("UserName", parameters.username),
+            new Claim("IssuedAt", now.ToUniversalTime().ToString(), ClaimValueTypes.Integer64)
+            };
+
+            var symmetricKeyAsBase64 = _authConfig.Secret;
+            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
+            var signingKey = new SymmetricSecurityKey(keyByteArray);
+
+            var jwt = new JwtSecurityToken(
+                issuer: _authConfig.Issuer,
+                audience: _authConfig.Audience,
+                claims: claims,
+                notBefore: now,
+                expires: now.Add(TimeSpan.FromSeconds(_authConfig.AccessTokenLife)),
+                signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
+
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            // Generate new refresh token
+            var refreshTokenId = Guid.NewGuid().ToString("n"); // r : Raghav
 
             var token = new RefreshToken()
             {
@@ -101,66 +166,34 @@ namespace DS.Web.Areas.Api.Controllers
                 Subject = parameters.username,
                 IssuedUtc = DateTime.UtcNow,
                 ExpiresUtc = DateTime.UtcNow.AddMinutes(Convert.ToDouble(client.RefreshTokenLifeTime)),
-                CreatedBy=0,
-                CreatedOn= DateTime.UtcNow,
-                IsDeleted=false,
-                ModifiedBy=0,
-                IsPublished=true,
-                ModifiedOn=DateTime.UtcNow,
-                ObjectState =  Frameowrk.Repository.Infrastructure.Pattern.ObjectState.Added,
-                ProtectedTicket= ""
-
+                CreatedBy = 0,
+                CreatedOn = DateTime.UtcNow,
+                IsDeleted = false,
+                ModifiedBy = 0,
+                IsPublished = true,
+                ModifiedOn = DateTime.UtcNow,
+                ObjectState = Frameowrk.Repository.Infrastructure.Pattern.ObjectState.Added,
+                ProtectedTicket = encodedJwt
             };
 
-            
-
-            ////store the refresh_token   
             if (await _authService.AddRefreshToken(token))
             {
-                return Ok(GetJwt(parameters.client_id, refreshTokenId));
+                var response = new
+                {
+                    access_token = encodedJwt,
+                    expires_in = (int)TimeSpan.FromSeconds(_authConfig.AccessTokenLife).TotalSeconds,
+                    refresh_token = refreshTokenId,
+                    token_type = "bearer"
+                };
+
+                return response;
             }
             else
             {
                 return Unauthorized();
             }
-        }
 
 
-
-        private string GetJwt(string client_id, string refresh_token)
-        {
-            var now = DateTime.UtcNow;
-
-            var claims = new Claim[]
-            {
-            new Claim(JwtRegisteredClaimNames.Sub, client_id),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.Iat, now.ToUniversalTime().ToString(), ClaimValueTypes.Integer64)
-            };
-
-            var symmetricKeyAsBase64 = "ANY_SECRET_KEY_TO_ENCRYPT";
-            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
-            var signingKey = new SymmetricSecurityKey(keyByteArray);
-
-            var jwt = new JwtSecurityToken(
-                issuer: "ISSUER",
-                audience: "AUDIENCE",
-                claims: claims,
-                notBefore: now,
-                expires: now.Add(TimeSpan.FromMinutes(2)),
-                signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-            var response = new
-            {
-                access_token = encodedJwt,
-                expires_in = (int)TimeSpan.FromMinutes(2).TotalSeconds,
-                refresh_token = refresh_token,
-                token_type = "bearer"
-
-            };
-
-            return JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented });
         }
 
     }

@@ -10,6 +10,17 @@
     <ProjectReference Include="..\..\Libraries\DS.Core\DS.Core.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Data\DS.Data.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Service\DS.Services.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.IdentityModel.Tokens">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.identitymodel.tokens\5.1.4\lib\netstandard1.4\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

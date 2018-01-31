@@ -3,6 +3,7 @@ using DS.Domain.Models.Users;
 using DS.Services;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DS.Web.Areas.Api.Controllers
 {
@@ -20,11 +21,13 @@ namespace DS.Web.Areas.Api.Controllers
         // GET: api/User
         [HttpGet]
         [Route("")]
+        [Authorize]
         public IActionResult Get()
         {
-            var data = _usersService.Query().Include(x=>x.Employees).Select();
+            var data = _usersService.Query().Include(x => x.Employees).Select();
 
-
+            var userClaim = HttpContext.User.Claims.Where(x => x.Type == "UserName").FirstOrDefault();
+            return Ok(userClaim?.Value ?? "No Value");
             return Ok(data);
         }
 

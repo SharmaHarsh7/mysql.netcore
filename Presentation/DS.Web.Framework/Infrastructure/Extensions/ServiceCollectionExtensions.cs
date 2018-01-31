@@ -1,18 +1,21 @@
-﻿using Microsoft.AspNetCore.DataProtection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
+using Microsoft.Extensions.Configuration;
 using DS.Core.Configuration;
 using DS.Core.Infrastructure;
 using DS.Data;
-using System;
-using System.IO;
-using System.Linq;
-using DS.Data.Models;
 using DS.Web.Framework.Filters;
+
+using Microsoft.EntityFrameworkCore;
+
+
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Serialization;
+using System;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Nop.Web.Framework.Infrastructure.Extensions
 {
@@ -29,8 +32,8 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// <returns>Configured service provider</returns>
         public static IServiceProvider ConfigureApplicationServices(this IServiceCollection services, IConfigurationRoot configuration)
         {
-
             services.AddNSMvc();
+            services.AddOptions();
 
             // setup database connection
             services.Configure<DBSettings>(options =>
@@ -44,10 +47,15 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
             services.AddDbContext<DbContext>(options => options.UseMySQL(configuration.GetSection("SQLConnection:ConnectionString").Value));
 
             // Load NS Config from the appsetting.json file
-            services.ConfigureStartupConfig<DSConfig>(configuration.GetSection("NSConfig"));
+            services.ConfigureStartupConfig<DSConfig>(configuration.GetSection("DSConfig"));
+
+            // Load Auth Config from the appsetting.json file
+            var authConfig = services.ConfigureStartupConfig<AuthConfig>(configuration.GetSection("AuthConfig"));
 
             //add accessor to HttpContext
             services.AddHttpContextAccessor();
+
+            services.ConfigureJwtAuthService(authConfig);
 
             //create, initialize and configure the engine
             var engine = EngineContext.Create();
@@ -102,6 +110,7 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// <returns>A builder for configuring MVC services</returns>
         public static IMvcBuilder AddNSMvc(this IServiceCollection services)
         {
+            
             //add basic MVC feature
             var mvcBuilder = services.AddMvc(
                                config =>
@@ -121,6 +130,46 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
             return mvcBuilder;
         }
+
+        public static void ConfigureJwtAuthService(this IServiceCollection services, AuthConfig authConfig)
+        {
+
+            var symmetricKeyAsBase64 = authConfig.Secret;
+            var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
+            var signingKey = new SymmetricSecurityKey(keyByteArray);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                // The signing key must match!  
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+
+                //// Validate the JWT Issuer (iss) claim  
+                ValidateIssuer = true,
+                ValidIssuer = authConfig.Issuer,
+
+                //// Validate the JWT Audience (aud) claim  
+                ValidateAudience = true,
+                ValidAudience = authConfig.Audience,
+
+                // Validate the token expiry  
+                ValidateLifetime = true,
+
+                ClockSkew = TimeSpan.Zero
+            };
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = tokenValidationParameters;
+            });
+        }
+
+
 
     }
 }

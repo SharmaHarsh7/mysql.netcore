@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="2.0.2" />
-    <PackageReference Include="LinqKit.Core" Version="1.1.12" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.5" />
+    <PackageReference Include="LinqKit.Core" Version="1.1.13" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="6.10.6" />
   </ItemGroup>
 
   <ItemGroup>

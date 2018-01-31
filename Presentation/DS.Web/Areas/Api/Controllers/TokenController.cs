@@ -94,7 +94,7 @@ namespace DS.Web.Areas.Api.Controllers
 
             if (!isValidated)
             {
-                return Unauthorized();
+                throw new UnauthorizedAccessException("Invalid user credentials");
             }
 
             return Ok(await GetJwt(client, parameters));
@@ -106,13 +106,13 @@ namespace DS.Web.Areas.Api.Controllers
 
             if (token == null)
             {
-                return BadRequest("Invalid refresh token");
+                throw new UnauthorizedAccessException("Invalid refresh token");
             }
 
             // Validate if refresh token expired
             if (token.ExpiresUtc > DateTime.UtcNow)
             {
-                return BadRequest("Refresh token expired");
+                throw new UnauthorizedAccessException("Refresh token expired");
             }
 
             var protectedTicket = new JwtSecurityTokenHandler().ReadJwtToken(token.ProtectedTicket);

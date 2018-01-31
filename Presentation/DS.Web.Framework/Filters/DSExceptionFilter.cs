@@ -31,7 +31,8 @@ namespace DS.Web.Framework.Filters
             var exceptionType = context.Exception.GetType();
             if (exceptionType == typeof(UnauthorizedAccessException))
             {
-                message = "Unauthorized Access";
+                
+                message = string.IsNullOrEmpty(context.Exception.Message) ? "Unauthorized Access" : context.Exception.Message;
                 status = HttpStatusCode.Unauthorized;
             }
             else if (exceptionType == typeof(NotImplementedException))

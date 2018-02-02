@@ -27,7 +27,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\DS.Framework.Repository.Pattern.MySQL\DS.Framework.Repository.Pattern.MySQL.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Core\DS.Core.csproj" />
-    <ProjectReference Include="..\..\Libraries\DS.Domain\DS.Domain.csproj" />
     <ProjectReference Include="..\..\Libraries\DS.Service\DS.Services.csproj" />
   </ItemGroup>
 

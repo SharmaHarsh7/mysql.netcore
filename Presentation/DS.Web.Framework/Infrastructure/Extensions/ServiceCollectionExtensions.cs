@@ -16,6 +16,8 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using DS.Core.Data;
+using Serilog;
 
 namespace Nop.Web.Framework.Infrastructure.Extensions
 {
@@ -32,6 +34,9 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
         /// <returns>Configured service provider</returns>
         public static IServiceProvider ConfigureApplicationServices(this IServiceCollection services, IConfigurationRoot configuration)
         {
+
+            Log.Information("ConfigureApplicationServices : Begin");
+
             services.AddNSMvc();
             services.AddOptions();
 
@@ -61,6 +66,18 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
             var engine = EngineContext.Create();
             engine.Initialize(services);
             var serviceProvider = engine.ConfigureServices(services, configuration);
+          //  throw new Exception("Test Exception ");
+
+            //if (DataSettingsHelper.DatabaseIsInstalled())
+            //{
+            //    //implement schedule tasks
+            //    //database is already installed, so start scheduled tasks
+            //    //TaskManager.Instance.Initialize();
+            //    //TaskManager.Instance.Start();
+
+            //    //log application start
+                Log.Information("Application started");
+            //}
 
             return serviceProvider;
         }

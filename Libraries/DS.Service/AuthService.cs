@@ -1,4 +1,5 @@
-﻿using DS.Domain.Models.Users;
+﻿using DS.Code.Domain.Models.Authentication;
+using DS.Domain.Models.Users;
 using DS.Frameowrk.Repository.Repositories.Pattern;
 using DS.Frameowrk.Repository.UnitOfWork.Pattern;
 using System.Collections.Generic;

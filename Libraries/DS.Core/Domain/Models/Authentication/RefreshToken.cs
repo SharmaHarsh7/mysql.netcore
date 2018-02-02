@@ -1,7 +1,7 @@
 ﻿using DS.Core.Domain;
 using System;
 
-namespace DS.Domain.Models.Users
+namespace DS.Code.Domain.Models.Authentication
 {
     public class RefreshToken : BaseEntity
     {

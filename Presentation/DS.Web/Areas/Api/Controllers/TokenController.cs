@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using DS.Core.Configuration;
+using DS.Code.Domain.Models.Authentication;
 
 namespace DS.Web.Areas.Api.Controllers
 {

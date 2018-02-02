@@ -10,7 +10,6 @@
         <ProjectReference Include="..\..\Framework\DS.Framework.Service\DS.Framework.Service.Pattern.csproj" />
         <ProjectReference Include="..\DS.Core\DS.Core.csproj" />
         <ProjectReference Include="..\DS.Data\DS.Data.csproj" />
-        <ProjectReference Include="..\DS.Domain\DS.Domain.csproj" />
   </ItemGroup>
 
 </Project>

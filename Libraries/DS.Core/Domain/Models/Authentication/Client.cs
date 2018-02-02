@@ -2,7 +2,7 @@
 using DS.Core.Enums;
 using System.Collections.Generic;
 
-namespace DS.Domain.Models.Users
+namespace DS.Code.Domain.Models.Authentication
 {
     public class Client : BaseEntity
     {

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using DS.Code.Domain.Models.Authentication;
 using DS.Core.Configuration;
 using DS.Core.Domain.Configuration;
 using DS.Core.Infrastructure;

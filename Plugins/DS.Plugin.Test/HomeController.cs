@@ -1,27 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
-using System;
+using System.Text.Encodings.Web;
 
 namespace MvcMovie.Controllers
 {
-    [Route("")]
+
     public class HomeController : Controller
     {
         // 
         // GET: /HelloWorld/
-        [HttpGet("")]
-        public IActionResult Index()
+
+        public string Index()
         {
-            Log.Information("Home > Index");
-
-            
-
-            return View();
-        }
-
-        private Exception Exception(string v)
-        {
-            throw new NotImplementedException();
+            return "website is running...";
         }
 
         // 

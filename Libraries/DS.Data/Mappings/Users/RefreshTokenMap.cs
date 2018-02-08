@@ -12,7 +12,7 @@ namespace DS.Data.Mappings.Users
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Subject).IsRequired().HasMaxLength(50);
             builder.Property(x => x.ClientId).IsRequired().HasMaxLength(50);
-            builder.Property(x => x.ProtectedTicket).IsRequired().HasDefaultValue("");
+            builder.Property(x => x.ProtectedTicket).IsRequired();
             builder.Property(x => x.IssuedUtc).IsRequired();
             builder.Property(x => x.ExpiresUtc).IsRequired();
         }

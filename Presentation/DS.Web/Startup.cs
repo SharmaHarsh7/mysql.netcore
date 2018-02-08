@@ -25,6 +25,14 @@ namespace DS.Web
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
+
+            Log.Logger = new LoggerConfiguration()
+           .MinimumLevel.Information()
+           .WriteTo.File("logs\\myapp.txt", rollingInterval: RollingInterval.Day)
+           .CreateLogger();
+
+            Log.Information("Logger Setup Done");
+
         }
 
         #endregion
@@ -42,13 +50,7 @@ namespace DS.Web
 
             EngineContext.Current.ConfigureRequestPipeline(app);
 
-            Log.Logger = new LoggerConfiguration()
-               .MinimumLevel.Information()
-               .WriteTo.File("logs\\myapp.txt", rollingInterval: RollingInterval.Day)
-               .CreateLogger();
-
-            Log.Information("Logger Setup Done");
-
+        
 
             //app.UseExceptionHandler(
             //                           options =>

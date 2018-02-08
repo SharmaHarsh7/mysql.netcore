@@ -2,6 +2,7 @@
 using DS.Frameowrk.Repository.Repositories.Pattern;
 using DS.Frameowrk.Repository.UnitOfWork.Pattern;
 using DS.Frameowrk.Service.Pattern;
+using Serilog;
 using System.Linq;
 
 namespace DS.Services
@@ -26,6 +27,7 @@ namespace DS.Services
         {
             _employeeRepository = employeeRepository;
             _unitOfWorkAsync = unitOfWorkAsync;
+            Log.Information("Employee service initilized");
         }
 
         public Employee GetEmployee(int id)

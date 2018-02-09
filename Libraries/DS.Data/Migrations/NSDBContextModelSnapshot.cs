@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MySql.Data.EntityFrameworkCore.Storage.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace DS.Data.Migrations
@@ -17,6 +18,7 @@ namespace DS.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
             modelBuilder.Entity("DS.Code.Domain.Models.Authentication.Client", b =>
@@ -130,11 +132,15 @@ namespace DS.Data.Migrations
                     b.Property<int>("ID_Employee")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ID_User");
+                    b.Property<int>("ID_User");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("Test")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
                     b.HasKey("ID_Employee");
 
@@ -181,7 +187,8 @@ namespace DS.Data.Migrations
                 {
                     b.HasOne("DS.Domain.Models.Users.User", "User")
                         .WithMany("Employees")
-                        .HasForeignKey("ID_User");
+                        .HasForeignKey("ID_User")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

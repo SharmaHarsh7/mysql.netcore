@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace DS.Data.Migrations
 {
-    public partial class InitMigrate : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,7 +59,7 @@ namespace DS.Data.Migrations
                 columns: table => new
                 {
                     ID_Setting = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreatedBy = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -78,7 +79,7 @@ namespace DS.Data.Migrations
                 columns: table => new
                 {
                     ID_User = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CreatedBy = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
@@ -99,9 +100,10 @@ namespace DS.Data.Migrations
                 columns: table => new
                 {
                     ID_Employee = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:AutoIncrement", true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ID_User = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Test = table.Column<string>(maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {

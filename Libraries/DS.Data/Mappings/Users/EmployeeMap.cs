@@ -10,6 +10,7 @@ namespace DS.Data.Mappings.Users
         {
             builder.HasKey(x => x.ID_Employee);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
+                        builder.Property(x => x.Test).IsRequired().HasMaxLength(10);
 
             builder.HasOne(x=>x.User).WithMany(y=>y.Employees).HasForeignKey(z=>z.ID_User).IsRequired(false);
         }

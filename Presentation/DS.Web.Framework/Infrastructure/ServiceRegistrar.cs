@@ -5,9 +5,11 @@ using DS.Core.Domain.Configuration;
 using DS.Core.Infrastructure;
 using DS.Core.Infrastructure.DependencyManagement;
 using DS.Data.Models;
+using DS.Data.Mongo.Entities;
 using DS.Domain.Models.Users;
 using DS.Frameowrk.Repository.Repositories.Pattern;
 using DS.Frameowrk.Repository.UnitOfWork.Pattern;
+using DS.Framework.Mongo.Repository;
 using DS.Framework.Repository.Pattern.DataContext;
 using DS.Framework.Repository.Pattern.MySQL;
 using DS.Services;
@@ -29,7 +31,8 @@ namespace DS.Web.Framework.Infrastructure
             builder.RegisterType<Repository<Employee>>().As<IRepositoryAsync<Employee>>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<Client>>().As<IRepositoryAsync<Client>>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<RefreshToken>>().As<IRepositoryAsync<RefreshToken>>().InstancePerLifetimeScope();
-            
+            builder.RegisterType<MongoRepository<Note>>().As<IMongoRepository<Note>>().InstancePerLifetimeScope();
+
 
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             builder.RegisterType<EmployeeService>().As<IEmployeeService>().InstancePerLifetimeScope();

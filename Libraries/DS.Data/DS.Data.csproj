@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.5.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
       <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
@@ -16,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\DS.Framework.Repository.Pattern.MySQL\DS.Framework.Repository.Pattern.MySQL.csproj" />
     <ProjectReference Include="..\..\Framework\DS.Framework.Repository\DS.Framework.Repository.Pattern.csproj" />
+    <ProjectReference Include="..\..\Framework\Mongo\DS.Framework.Mongo.Repository\DS.Framework.Mongo.Repository.csproj" />
     <ProjectReference Include="..\DS.Core\DS.Core.csproj" />
   </ItemGroup>
 

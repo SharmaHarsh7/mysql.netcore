@@ -138,8 +138,7 @@ namespace DS.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("Test")
-                        .IsRequired()
+                    b.Property<int>("Test")
                         .HasMaxLength(10);
 
                     b.HasKey("ID_Employee");

@@ -31,6 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{4753
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DS.Plugin.Test", "..\Plugins\DS.Plugin.Test\DS.Plugin.Test.csproj", "{0F8D4ADF-F1B2-43B9-8645-1CE7DB6F9CCF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mongo", "Mongo", "{690CD168-BABC-4195-968E-62042C67AA62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.Framework.Mongo.Repository", "..\Framework\Mongo\DS.Framework.Mongo.Repository\DS.Framework.Mongo.Repository.csproj", "{42F479C8-2950-495F-A31B-03DC21695D18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{0F8D4ADF-F1B2-43B9-8645-1CE7DB6F9CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F8D4ADF-F1B2-43B9-8645-1CE7DB6F9CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F8D4ADF-F1B2-43B9-8645-1CE7DB6F9CCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F479C8-2950-495F-A31B-03DC21695D18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F479C8-2950-495F-A31B-03DC21695D18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F479C8-2950-495F-A31B-03DC21695D18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F479C8-2950-495F-A31B-03DC21695D18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +100,8 @@ Global
 		{956E2F4B-B6CD-41EE-A171-D8F53772DC1A} = {54F6C4D7-17DE-4DB2-B492-BF49144E4B7A}
 		{49F141E4-7748-493B-8CE5-4A17464E06C4} = {54F6C4D7-17DE-4DB2-B492-BF49144E4B7A}
 		{0F8D4ADF-F1B2-43B9-8645-1CE7DB6F9CCF} = {47539641-18D4-4B54-814C-F120C6C6014D}
+		{690CD168-BABC-4195-968E-62042C67AA62} = {0846CECA-CB2F-44E6-96CB-F3DAEB5AE2BC}
+		{42F479C8-2950-495F-A31B-03DC21695D18} = {690CD168-BABC-4195-968E-62042C67AA62}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AEFC8046-D50E-4961-92CD-5B8F74085054}

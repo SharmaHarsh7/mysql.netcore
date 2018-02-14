@@ -6,9 +6,9 @@ namespace DS.Domain.Models.Users
     {
         public int ID_Employee { get; set; }
         public string Name { get; set; }
-        public string Test { get; set; }
+        public int Test { get; set; }
 
-        public int? ID_User { get; set; }
+        public int ID_User { get; set; }
 
         public virtual User User { get; set; }
     }

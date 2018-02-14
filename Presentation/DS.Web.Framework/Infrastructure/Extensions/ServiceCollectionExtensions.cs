@@ -53,6 +53,8 @@ namespace Nop.Web.Framework.Infrastructure.Extensions
 
             // Load NS Config from the appsetting.json file
             services.ConfigureStartupConfig<DSConfig>(configuration.GetSection("DSConfig"));
+            services.ConfigureStartupConfig<MongoConfig>(configuration.GetSection("MongoConnection"));
+
 
             // Load Auth Config from the appsetting.json file
             var authConfig = services.ConfigureStartupConfig<AuthConfig>(configuration.GetSection("AuthConfig"));

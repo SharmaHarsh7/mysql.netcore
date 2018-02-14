@@ -7,6 +7,8 @@ using DS.Core.Configuration;
 using DS.Core.Infrastructure;
 using DS.Core.Infrastructure.DependencyManagement;
 using DS.Core.Plugins;
+using DS.Data.Mongo;
+using DS.Framework.Mongo.Repository;
 using DS.Services.Configuration;
 using DS.Services.Events;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -42,6 +44,8 @@ namespace Nop.Web.Framework.Infrastructure
 
             //static cache manager
             builder.RegisterType<MemoryCacheManager>().As<IStaticCacheManager>().SingleInstance();
+
+            builder.RegisterType<MongoDBContext>().As<IMongoDBContext>().SingleInstance();
 
             builder.RegisterType<ActionContextAccessor>().As<IActionContextAccessor>().InstancePerLifetimeScope();
 

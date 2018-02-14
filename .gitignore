@@ -23,3 +23,5 @@
 /Presentation/DS.Web.Framework/bin
 /Presentation/DS.Web.Framework/obj
 /Presentation/DS.Web/logs
+/Framework/Mongo/DS.Framework.Mongo.Repository/bin/Debug/netcoreapp2.0
+/Framework/Mongo/DS.Framework.Mongo.Repository/obj

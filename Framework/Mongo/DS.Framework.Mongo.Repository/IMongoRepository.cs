@@ -9,6 +9,8 @@ namespace DS.Framework.Mongo.Repository
         IEnumerable<T> Get();
         T Insert(T t);
 
+        bool Delete(string id);
+
         IMongoCollection<T> Queryable();
     }
 }

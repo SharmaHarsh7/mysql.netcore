@@ -26,9 +26,11 @@ namespace DS.Web
                 .AddEnvironmentVariables()
                 .Build();
 
+            string mongoURL = Configuration.GetSection("MongoConnection:ConnectionString").Value + Configuration.GetSection("MongoConnection:Database").Value;
+
             Log.Logger = new LoggerConfiguration()
-           .MinimumLevel.Information()
-           .WriteTo.File("logs\\myapp.txt", rollingInterval: RollingInterval.Day)
+           .WriteTo.File("logs\\myapp.txt", Serilog.Events.LogEventLevel.Verbose, rollingInterval: RollingInterval.Day)
+           .WriteTo.MongoDB(mongoURL, restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information, collectionName: "Logs")
            .CreateLogger();
 
             Log.Information("Logger Setup Done");

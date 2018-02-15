@@ -3,6 +3,7 @@ using DS.Data.Mongo.Entities;
 using DS.Framework.Mongo.Repository;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace DS.Web.Areas.Api.Controllers
 {
@@ -10,9 +11,9 @@ namespace DS.Web.Areas.Api.Controllers
     [Route("api/MongoTest")]
     public class MongoTestController : Controller
     {
-        private readonly IMongoRepository<Note> _noteRepository;
+        private readonly IMongoRepositoryAsync<Note> _noteRepository;
 
-        public MongoTestController(IMongoRepository<Note> noteRepository)
+        public MongoTestController(IMongoRepositoryAsync<Note> noteRepository)
         {
             _noteRepository = noteRepository;
         }
@@ -25,15 +26,20 @@ namespace DS.Web.Areas.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> Get(string id)
         {
-            var data = _noteRepository.Get(id);
+            var data = await _noteRepository.GetAsync(id);
             return Ok(data);
         }
 
         [HttpPost("")]
         public IActionResult Post([FromBody]Note note)
         {
+             var a= _noteRepository.Queryable().Find(x => true).FirstOrDefault();
+
+
+
+            
             var data = _noteRepository.Insert(note);
             return Ok(data);
         }

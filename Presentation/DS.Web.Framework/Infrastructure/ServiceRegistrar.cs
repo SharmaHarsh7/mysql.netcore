@@ -31,7 +31,7 @@ namespace DS.Web.Framework.Infrastructure
             builder.RegisterType<Repository<Employee>>().As<IRepositoryAsync<Employee>>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<Client>>().As<IRepositoryAsync<Client>>().InstancePerLifetimeScope();
             builder.RegisterType<Repository<RefreshToken>>().As<IRepositoryAsync<RefreshToken>>().InstancePerLifetimeScope();
-            builder.RegisterType<MongoRepository<Note>>().As<IMongoRepository<Note>>().InstancePerLifetimeScope();
+            builder.RegisterType<MongoRepository<Note>>().As<IMongoRepositoryAsync<Note>>().InstancePerLifetimeScope();
 
 
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
